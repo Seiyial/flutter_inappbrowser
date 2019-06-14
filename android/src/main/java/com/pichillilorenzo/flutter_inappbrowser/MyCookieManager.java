@@ -101,7 +101,7 @@ public class MyCookieManager implements MethodChannel.MethodCallHandler {
     if (maxAge != null)
       cookieValue += "; Max-Age=" + maxAge.toString();
 
-    cookieValue += "; HTTPOnly" + "; Path=" + path;
+    cookieValue += "; HttpOnly" + "; Path=" + path;
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       Log.i("@{Java}-MyCookieManager", "@-> SetCookie " + url + ":::" + cookieValue);
