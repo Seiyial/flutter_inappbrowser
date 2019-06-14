@@ -109,10 +109,12 @@ public class MyCookieManager implements MethodChannel.MethodCallHandler {
         @Override
         public void onReceiveValue(Boolean aBoolean) {
           Log.i("@{Java}-MyCookieManager", "@-> AfterSetCookie setResultSuccess");
+          Log.i("@{Java}-MyCookieManager", "@-> SYNCHR FLUSH");
+          cookieManager.flush();
+          Log.i("@{Java}-MyCookieManager", "@-> Flushed");
           result.success(true);
         }
       });
-      cookieManager.flush();
     }
     else {
       Log.i("@{Java}-MyCookieManager", "@-> CreateInstance");
