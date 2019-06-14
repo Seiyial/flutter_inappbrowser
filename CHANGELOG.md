@@ -1,3 +1,8 @@
+## ORO Fork V1
+
+- Conforms to cookie standards required by Orovault
+- Fixed a bug where synchronous sync/setting of cookies into the InAppBrowser/WebView wasn't actually synchronous, so that flutter side can know that sync has completed before proceeding
+
 ## 1.2.1
 
 - Merge "Add new option to control the contentMode in Android platform" [#101](https://github.com/pichillilorenzo/flutter_inappbrowser/pull/101) (thanks to [DreamBuddy](https://github.com/DreamBuddy))
