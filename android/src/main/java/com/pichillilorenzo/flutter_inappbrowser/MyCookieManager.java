@@ -101,7 +101,7 @@ public class MyCookieManager implements MethodChannel.MethodCallHandler {
     if (isSecure != null && isSecure)
       cookieValue += "; Secure";
 
-    cookieValue += ";";
+    cookieValue += "; HTTPOnly;";
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       Log.i("@{Java}-MyCookieManager", "@-> SetCookie " + url + ":::" + cookieValue);
@@ -118,14 +118,14 @@ public class MyCookieManager implements MethodChannel.MethodCallHandler {
     }
     else {
       Log.i("@{Java}-MyCookieManager", "@-> CreateInstance");
-      CookieSyncManager cookieSyncMngr = CookieSyncManager.createInstance(registrar.context());
+      // CookieSyncManager cookieSyncMngr = CookieSyncManager.createInstance(registrar.context());
       Log.i("@{Java}-MyCookieManager", "@-> StartSync");
-      cookieSyncMngr.startSync();
+      // cookieSyncMngr.startSync();
       Log.i("@{Java}-MyCookieManager", "@-> SetCookie");
       cookieManager.setCookie(url, cookieValue);
       Log.i("@{Java}-MyCookieManager", "@-> AfterSetCookie setResultSuccess");
       Log.i("@{Java}-MyCookieManager", "@-> StopSync");
-      cookieSyncMngr.stopSync();
+      // cookieSyncMngr.stopSync();
       Log.i("@{Java}-MyCookieManager", "@-> ReSync");
       // cookieSyncMngr.sync(); deprecated in API 21
       cookieManager.flush();
@@ -164,18 +164,20 @@ public class MyCookieManager implements MethodChannel.MethodCallHandler {
       cookieManager.setCookie(url, cookieValue, new ValueCallback<Boolean>() {
         @Override
         public void onReceiveValue(Boolean aBoolean) {
+          cookieManager.flush();
+          Log.i("@{Java}-MyCookieManager", "@-> Flushed");
           result.success(true);
         }
       });
-      cookieManager.flush();
     }
     else {
-      CookieSyncManager cookieSyncMngr = CookieSyncManager.createInstance(registrar.context());
-      cookieSyncMngr.startSync();
+      // CookieSyncManager cookieSyncMngr = CookieSyncManager.createInstance(registrar.context());
+      // cookieSyncMngr.startSync();
       cookieManager.setCookie(url, cookieValue);
+      cookieManager.flush();
       result.success(true);
-      cookieSyncMngr.stopSync();
-      cookieSyncMngr.sync();
+      // cookieSyncMngr.stopSync();
+      // cookieSyncMngr.sync();
     }
   }
 
