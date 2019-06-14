@@ -113,11 +113,17 @@ public class MyCookieManager implements MethodChannel.MethodCallHandler {
       cookieManager.flush();
     }
     else {
+      Log.i("@{Java}-MyCookieManager", "@-> CreateInstance");
       CookieSyncManager cookieSyncMngr = CookieSyncManager.createInstance(registrar.context());
+      Log.i("@{Java}-MyCookieManager", "@-> StartSync");
       cookieSyncMngr.startSync();
+      Log.i("@{Java}-MyCookieManager", "@-> SetCookie");
       cookieManager.setCookie(url, cookieValue);
+      Log.i("@{Java}-MyCookieManager", "@-> AfterSetCookie setResultSuccess");
       result.success(true);
+      Log.i("@{Java}-MyCookieManager", "@-> StopSync");
       cookieSyncMngr.stopSync();
+      Log.i("@{Java}-MyCookieManager", "@-> ReSync");
       cookieSyncMngr.sync();
     }
   }
