@@ -94,14 +94,14 @@ public class MyCookieManager implements MethodChannel.MethodCallHandler {
 
     if (isSecure != null && isSecure)
       cookieValue += "; Secure";
-    
+
     if (expiresDate != null)
       cookieValue += "; Expires=" + getCookieExpirationDate(expiresDate);
 
     if (maxAge != null)
       cookieValue += "; Max-Age=" + maxAge.toString();
 
-    cookieValue += "; HTTPOnly;" + "; Path=" + path;
+    cookieValue += "; HTTPOnly" + "; Path=" + path;
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       Log.i("@{Java}-MyCookieManager", "@-> SetCookie " + url + ":::" + cookieValue);
